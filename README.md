@@ -12,6 +12,7 @@
 ```matlab
 function [X] = tensor_sparse_coding(Y, D, Xinit, opts)
 % Solving tensor sparse coding problem with different sparsity constraints.
+%   using FISTA 
 % Y: a 3-D tensor of size (d-n-T) 
 %       (dimension, number of data points, number of channels)
 % D: a 3-D tensor of size (d-K-T) dictionary with D 'atoms'
@@ -23,7 +24,8 @@ function [X] = tensor_sparse_coding(Y, D, Xinit, opts)
 %           - 'concat': all channels are concatenated to one long long vector (CC)
 %           - 'l1': simple l1 (CR)
 %           - 'tube': tube sparsity as in the paper (SM)
-%           - 'group': group tensor as in the paper (GT)
+%           - 'group_tensor': group tensor as in the paper (GT)
+%       opts.pos: a boolean, with nonnegativity constraint or not 
 % output: 
 %       X: a 3-D tensor of size (K-n-T)
 ```
