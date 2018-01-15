@@ -12,8 +12,8 @@
 ```matlab
 function [X] = tensor_sparse_coding(Y, D, Xinit, opts)
 % Solving tensor sparse coding problem with different sparsity constraints.
-%   using FISTA 
-% Y: a 3-D tensor of size (d-n-T) 
+%   using FISTA.
+% Y: a 3-D tensor of size (d-n-T), multi-channel signals 
 %       (dimension, number of data points, number of channels)
 % D: a 3-D tensor of size (d-K-T) dictionary with D 'atoms'
 % X: a 3-D tensor of size (K-n-T) starting guess of the solution,
