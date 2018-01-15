@@ -6,3 +6,24 @@
 
 ## Different tensor sparsity constraints 
 ![alttext](general_SRC.png)
+
+## Main function 
+`tensor_sparse_coding.m`
+```matlab
+function [X] = tensor_sparse_coding(Y, D, Xinit, opts)
+% Solving tensor sparse coding problem with different sparsity constraints.
+% Y: a 3-D tensor of size (d-n-T) 
+%       (dimension, number of data points, number of channels)
+% D: a 3-D tensor of size (d-K-T) dictionary with D 'atoms'
+% X: a 3-D tensor of size (K-n-T) starting guess of the solution,
+%       if X == [], then it is initialized with all zeros
+% opts: a structure, options for the optimization problem
+%       opts.eps: a number, tolerance 
+%       opts.regul: a string, regularization function:
+%           - 'concat': all channels are concatenated to one long long vector (CC)
+%           - 'l1': simple l1 (CR)
+%           - 'tube': tube sparsity as in the paper (SM)
+%           - 'group': group tensor as in the paper (GT)
+% output: 
+%       X: a 3-D tensor of size (K-n-T)
+```

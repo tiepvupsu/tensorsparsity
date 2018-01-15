@@ -6,14 +6,14 @@ function [X] = tensor_sparse_coding(Y, D, Xinit, opts)
 % X: a 3-D tensor of size (K-n-T) starting guess of the solution,
 %       if X == [], then it is initialized with all zeros
 % opts: a structure, options for the optimization problem
-%		opts.eps: a number, tolerance 
+%       opts.eps: a number, tolerance 
 %       opts.regul: a string, regularization function:
-%           - 'concat': all channels are concatenated to one long long vector
-%           - 'l1': simple l1 
-%           - 'tube': tube sparsity as in the paper 
-%           - 'group': group tensor as in the paper
+%           - 'concat': all channels are concatenated to one long long vector (CC)
+%           - 'l1': simple l1 (CR)
+%           - 'tube': tube sparsity as in the paper (SM)
+%           - 'group': group tensor as in the paper (GT)
 % output: 
-%		X: (k*C) and the corresponding residual
+%       X: a 3-D tensor of size (K-n-T)
 % -----------------------------------------------
 % Author: Tiep Vu, thv102@psu.edu, 6/6/2016
 %         (http://www.personal.psu.edu/thv102/)
