@@ -1,19 +1,21 @@
-function [X, res] = general_sparse_coding(Y, D, Xinit, opts)
-% function [X, res] = SHIRC_SC_l12_multi_2(Y, D, Xinit, opts)
-% Solving SHIRC problem 
-% `Y`: (d * n * T) - T representations of a signal 
-% `D`: (d * k * T) - T dictionaries 
-% `opts`:
-%		opts.eps: tolerance 
-%		opts.L: number of nonzero columns of X 
-%       opts.regul: regularization function:
-%           - 'l1'
-%           - 'l2'
-%           - 'l2_tensor'
+function [X] = tensor_sparse_coding(Y, D, Xinit, opts)
+% Solving tensor sparse coding problem with different sparsity constraints.
+% Y: a 3-D tensor of size (d-n-T) 
+%       (dimension, number of data points, number of channels)
+% D: a 3-D tensor of size (d-K-T) dictionary with D 'atoms'
+% X: a 3-D tensor of size (K-n-T) starting guess of the solution,
+%       if X == [], then it is initialized with all zeros
+% opts: a structure, options for the optimization problem
+%		opts.eps: a number, tolerance 
+%       opts.regul: a string, regularization function:
+%           - 'concat': all channels are concatenated to one long long vector
+%           - 'l1': simple l1 
+%           - 'tube': tube sparsity as in the paper 
+%           - 'group': group tensor as in the paper
 % output: 
-%		`X`: (k*C) and the corresponding residual
+%		X: (k*C) and the corresponding residual
 % -----------------------------------------------
-% Author: Tiep Vu, thv102@psu.edu, 6/6/2016 2:14:08 PM
+% Author: Tiep Vu, thv102@psu.edu, 6/6/2016
 %         (http://www.personal.psu.edu/thv102/)
 % -----------------------------------------------
     addpath('utils/');
@@ -38,9 +40,6 @@ function [X, res] = general_sparse_coding(Y, D, Xinit, opts)
         opts.regul = 'tube';
         opts.range = [0, 5, 10, 15, 20];
     end 
-
-    % D = normc(D);
-    % Y = normc(Y);
 
     %%
     [d, k, T] = size(D);
